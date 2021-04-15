@@ -70,7 +70,7 @@
 
 
 ///Simulation results for a hand.
-struct SimResults
+typedef struct SimResults
 {
     ///What percent of hands will our hand beat right now? (enumerates/simulates all opponent cards)
     float win;
@@ -95,7 +95,7 @@ struct SimResults
         ///Will count the number of evaluations we ran for our simulation.
         int evaluations;
     #endif
-};
+} SimResults;
 
 
 ///General info about a post flop hand.
@@ -150,7 +150,7 @@ EXPORT const char* GetHandStateBrief(const PostFlopState* state);
 
 
 ///Ranks a hand, a higher ranked hand beats any lower ranked hand.
-EXPORT unsigned int RankHand(const char* hand);
+extern "C" EXPORT unsigned int RankHand(const char* hand);
 unsigned int RankHand(const int* hand);
 
 
@@ -161,7 +161,7 @@ or >= the total number of boards, a full enumeration is performed.
 lowRange - highRange is the cards to evaluate for an oppenent. For example, setting low to .9 and high to 1
 would only evaluate the best 10% of the starting hole cards for the opponent.
 */
-EXPORT void SimulateHand(const char* hand, SimResults* results, float lowRange = 0, float highRange = 1, unsigned int boards = 0);
+extern "C" EXPORT void SimulateHand(const char* hand, SimResults* results, float lowRange = 0, float highRange = 1, unsigned int boards = 0);
 void SimulateHand(const int* hand, SimResults* results, float lowRange = 0, float highRange = 1, unsigned int boards = 0);
 
 

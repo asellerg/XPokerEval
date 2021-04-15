@@ -1,6 +1,7 @@
 #include "simulate.hpp"
 #include "simDefs.hpp"
 
+#include <cstring>
 #include <list>
 #include <sstream>
 
@@ -419,7 +420,7 @@ namespace Simulate
     }
 
 
-    void SimSdMulti(const Hand& shand, SimResults* results, size_t uboards, size_t hands, size_t numOpponents)
+    void SimSdMulti(const Hand& shand, SimResults* results, unsigned int uboards, unsigned int hands, unsigned int numOpponents)
     {
         //Ok, we have our work cut out here.
         //Boards is the number of boards to see.

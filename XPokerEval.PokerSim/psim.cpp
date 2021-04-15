@@ -1,9 +1,9 @@
 #include "psim.hpp"
 #include "simulate.hpp"
 #include <cstdlib>
+#include <cstring>
 #include <sstream>
 #include <vector>
-
 
 namespace
 {
