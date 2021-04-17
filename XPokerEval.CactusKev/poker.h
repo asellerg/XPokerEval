@@ -45,10 +45,10 @@ static char *value_str[] = {
 #define Ace	12
 
 // James Devlin: added declarations for methods in pokerlib.cpp
-void init_deck( int *deck );
-short eval_5hand( int *hand );
-int hand_rank( short val );
-void print_hand( int *hand, int n );
+extern "C" void init_deck( int *deck );
+extern "C" short eval_5hand( int *hand );
+extern "C" int hand_rank( short val );
+extern "C" void print_hand( int *hand, int n );
 void shuffle_deck( int *deck );
-short eval_5cards( int c1, int c2, int c3, int c4, int c5 );
-short eval_7hand( int *hand );
+extern "C" short eval_5cards( int c1, int c2, int c3, int c4, int c5 );
+extern "C" short eval_7hand( int *hand );

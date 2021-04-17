@@ -2,7 +2,7 @@
 #include <stdlib.h> // added for rand/srand
 #include "arrays.h"
 #include "poker.h"
-#include "..\XPokerEval.RNG\mtrand.h"
+#include "mtrand.h"
 
 // Poker hand evaluator
 //
