@@ -4,6 +4,9 @@
 #include <cstring>
 #include <list>
 #include <sstream>
+#include <array>
+#include <map>
+#include <string>
 
 namespace Simulate
 {
@@ -386,6 +389,7 @@ namespace Simulate
 
         size_t wins = 0, ties = 0, losses = 0, total = 0; //Out of all showdowns, what happens?
         size_t dNowWins = 0, d94Wins = 0, d90Wins = 0, totalBoards = 0; //Out of all boards, what happens?
+        std::map<std::string, int[3]> boardTally = {};
 
         CardMask theirs, commonDraw; //Holds the cards we enumerate.
         CardMask totalDead, totalCommon; //Holds the combination of board cards, and dead cards.
@@ -404,6 +408,13 @@ namespace Simulate
                 DECK_ENUMERATE_N_CARDS_D(StdDeck, commonDraw, cardsToDraw, dead, {SimSdInnerLoopRange(HostileEnumRange)});
             else
                 DECK_ENUMERATE_N_CARDS_D(StdDeck, commonDraw, cardsToDraw, dead, {SimSdInnerLoopRange(HostileEnumAll)});
+        }
+        int j = 0;
+        for (auto const& item : boardTally) {
+            for (int i = 0; i < 3; i++) {
+                results->boardTally[j][i] = item.second[i];
+            }
+            j++;
         }
 
         results->winSd = float(wins) / total;

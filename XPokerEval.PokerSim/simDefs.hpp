@@ -1,3 +1,6 @@
+#include <vector>
+#include <iostream>
+
 ///\file This file contions some defines and constants used by simulate.cpp.
 
 ///Optionally counts the number of evaluations we preform.
@@ -81,16 +84,17 @@ HostileEnum                                         \
 ({                                                  \
     CardMask_OR(hand, theirs, totalCommon);         \
     theirVal = Hand_EVAL_N_C(hand, handSize);       \
+    std::string boardKey = GenericDeck_maskString(&CurDeck, &totalCommon);\
                                                     \
     ++total;                                        \
     ++showDownTotal;                                \
                                                     \
     if (ourVal > theirVal)                          \
-        ++wins;                                     \
+        ++wins && ++boardTally[boardKey][0];        \
     else if (ourVal < theirVal)                     \
-        ++losses;                                   \
+        ++losses && ++boardTally[boardKey][2];      \
     else                                            \
-        ++ties;                                     \
+        ++ties && ++boardTally[boardKey][1];        \
                                                     \
     if (ourVal >= theirVal)                         \
         ++showDownWinsTies;                         \

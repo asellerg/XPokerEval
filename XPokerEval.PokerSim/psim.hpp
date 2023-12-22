@@ -1,6 +1,8 @@
 #ifndef PSIM_HPP
 #define PSIM_HPP
 
+#include <array>
+
 /* This program is free software. It comes without any warranty, to
 * the extent permitted by applicable law. You can redistribute it
 * and/or modify it under the terms of the Do What The Fuck You Want
@@ -95,6 +97,8 @@ typedef struct SimResults
         ///Will count the number of evaluations we ran for our simulation.
         int evaluations;
     #endif
+
+    int boardTally[][3];
 } SimResults;
 
 
@@ -171,7 +175,7 @@ Boards is the number of boards to see with Monte Carlo simulation.
 Hands is the number of hands to simulate per opponent per board.
 numOpponents is the number of Opponents.
 */
-EXPORT void SimulateHandMulti(const char* hand, SimResults* results, unsigned int boards = 2000, unsigned int hands = 500, unsigned int numOpponents = 9);
+extern "C" EXPORT void SimulateHandMulti(const char* hand, SimResults* results, unsigned int boards = 2000, unsigned int hands = 500, unsigned int numOpponents = 9);
 void SimulateHandMulti(const int* hand, SimResults* results, unsigned int boards = 2000, unsigned int hands = 500, unsigned int numOpponents = 9);
 
 #endif
