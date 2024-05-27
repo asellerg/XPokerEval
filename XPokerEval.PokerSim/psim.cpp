@@ -4,6 +4,7 @@
 #include <cstring>
 #include <sstream>
 #include <vector>
+#include <iostream>
 
 namespace
 {
@@ -95,9 +96,12 @@ namespace
 }
 
 
-const char* GetHandStateBrief(const PostFlopState* state)
+const char * GetHandStateBrief(const char* hand)
 {
-    return Simulate::GetHandStateBrief(state);
+    Simulate::Hand shand = StringToHand(hand);
+    PostFlopState state;
+    Simulate::GetHandState(shand, &state);
+    return Simulate::GetHandStateBrief(&state);
 }
 
 

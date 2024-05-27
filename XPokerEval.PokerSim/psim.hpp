@@ -2,6 +2,7 @@
 #define PSIM_HPP
 
 #include <array>
+#include <string>
 
 /* This program is free software. It comes without any warranty, to
 * the extent permitted by applicable law. You can redistribute it
@@ -98,59 +99,60 @@ typedef struct SimResults
         int evaluations;
     #endif
 
+    char buckets[1326 * 5];
     int boardTally[][3];
 } SimResults;
 
 
 ///General info about a post flop hand.
-struct PostFlopState
+typedef struct PostFlopState
 {
     ///Do we use both of our hole cards?
-    bool UsesBoth: 1;
-    bool UsesOne: 1;
-    bool UsesNone: 1;
+    bool UsesBoth;
+    bool UsesOne;
+    bool UsesNone;
 
     ///What is our actual hand rank?
-    bool IsNoPair: 1;
-    bool IsOnePair: 1;
-    bool IsTwoPair: 1;
-    bool IsTrips: 1;
-    bool IsStraight: 1;
-    bool IsFlush: 1;
-    bool IsFullHouse: 1;
-    bool IsQuads: 1;
-    bool IsStFlush: 1;
+    bool IsNoPair;
+    bool IsOnePair;
+    bool IsTwoPair;
+    bool IsTrips;
+    bool IsStraight;
+    bool IsFlush;
+    bool IsFullHouse;
+    bool IsQuads;
+    bool IsStFlush;
 
-    bool IsTopPair: 1; ///<We paired the highest card one the board with one in our hand.
-    bool IsMiddlePair: 1; ///<We paired the board, but it's not top or bottom pair. (may be 2nd best, 3rd best, etc.)
-    bool IsBottomPair: 1; ///<We paired the lowest card one the board with one in our hand.
-    bool IsOverPair: 1; ///<We have a pocket pair, and it's bigger than any card on the board.
-    bool IsOverCards: 1; ///<We just have two nonpaired cards bigger than anything on the board.
+    bool IsTopPair; ///<We paired the highest card one the board with one in our hand.
+    bool IsMiddlePair; ///<We paired the board, but it's not top or bottom pair. (may be 2nd best, 3rd best, etc.)
+    bool IsBottomPair; ///<We paired the lowest card one the board with one in our hand.
+    bool IsOverPair; ///<We have a pocket pair, and it's bigger than any card on the board.
+    bool IsOverCards; ///<We just have two nonpaired cards bigger than anything on the board.
 
-    bool IsStraightDrawPossible: 1; ///<Could someone have 4 to a straight?
-    bool IsStraightPossible: 1; ///Could someone have a straight?
+    bool IsStraightDrawPossible; ///<Could someone have 4 to a straight?
+    bool IsStraightPossible; ///Could someone have a straight?
 
-    bool IsFlushDrawPossible: 1; ///<Could someone have 4 to a suit?
-    bool IsFlushPossible: 1; ///<Could someone have 5 to a suit?
+    bool IsFlushDrawPossible; ///<Could someone have 4 to a suit?
+    bool IsFlushPossible; ///<Could someone have 5 to a suit?
 
-    bool IsFullHousePossible: 1; ///<Is a fullhouse or quads possible?
+    bool IsFullHousePossible; ///<Is a fullhouse or quads possible?
 
-    bool Is3Flush: 1; ///<Do we have exactly 3 cards to a flush?
-    bool Is4Flush: 1; ///<Do we have exactly 4 cards to a flush?
+    bool Is3Flush; ///<Do we have exactly 3 cards to a flush?
+    bool Is4Flush; ///<Do we have exactly 4 cards to a flush?
 
-    unsigned int FlushOuts: 4; ///<How many cards will give us flush?
-    unsigned int StraightOuts: 4; ///<How many cards will give us straight?
-    unsigned int BetterOuts: 4; ///<How many cards will give us a fullhouse or better?
-};
+    unsigned int FlushOuts; ///<How many cards will give us flush?
+    unsigned int StraightOuts; ///<How many cards will give us straight?
+    unsigned int BetterOuts; ///<How many cards will give us a fullhouse or better?
+} PostFlopState;
 
 
 ///Retuns some useful information about a hand.
-EXPORT void GetHandState(const char* hand, PostFlopState* results);
+extern "C" EXPORT void GetHandState(const char* hand, PostFlopState* results);
 void GetHandState(const int* hand, PostFlopState* results);
 
 
 ///Converts a hand state to a string telling us in plain english what we have.
-EXPORT const char* GetHandStateBrief(const PostFlopState* state);
+EXPORT const char * GetHandStateBrief(const char* hand);
 
 
 ///Ranks a hand, a higher ranked hand beats any lower ranked hand.

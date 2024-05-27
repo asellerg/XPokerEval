@@ -84,17 +84,17 @@ HostileEnum                                         \
 ({                                                  \
     CardMask_OR(hand, theirs, totalCommon);         \
     theirVal = Hand_EVAL_N_C(hand, handSize);       \
-    std::string boardKey = GenericDeck_maskString(&CurDeck, &totalCommon);\
+    std::string oppHandKey = GenericDeck_maskString(&CurDeck, &theirs);\
                                                     \
     ++total;                                        \
     ++showDownTotal;                                \
                                                     \
     if (ourVal > theirVal)                          \
-        ++wins && ++boardTally[boardKey][0];        \
+        ++wins && ++boardTally[oppHandKey][0];        \
     else if (ourVal < theirVal)                     \
-        ++losses && ++boardTally[boardKey][2];      \
+        ++losses && ++boardTally[oppHandKey][2];      \
     else                                            \
-        ++ties && ++boardTally[boardKey][1];        \
+        ++ties && ++boardTally[oppHandKey][1];        \
                                                     \
     if (ourVal >= theirVal)                         \
         ++showDownWinsTies;                         \

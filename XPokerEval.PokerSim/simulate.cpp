@@ -288,7 +288,6 @@ namespace Simulate
 
         if (state->IsFullHousePossible)
             out << " The board is paired.";
-
         return out.str().c_str();
     }
 
@@ -411,6 +410,7 @@ namespace Simulate
         }
         int j = 0;
         for (auto const& item : boardTally) {
+            memcpy(&results->buckets[j * 5], item.first.c_str(), 5);
             for (int i = 0; i < 3; i++) {
                 results->boardTally[j][i] = item.second[i];
             }
